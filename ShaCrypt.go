@@ -1,8 +1,8 @@
 package passwords
 
 import (
-	"crypto/sha512"
 	"errors"
+	"hash"
 	"math/big"
 )
 
@@ -32,7 +32,13 @@ func ShaCrypt(pass, salt string) (string, error) {
 	}
 
 	// Create the hasher (unique per instance to be thread safe :D)
-	hasher := sha512.New()
+	hasher := sha512Pool.Get().(hash.Hash)
+	// Return to the pool! (later)
+	defer sha512Pool.Put(hasher)
+
+	// We can't know this hasher is fresh
+	hasher.Reset()
+
 	hashLen := hasher.Size()
 
 	// Change to bytes, more naitive
