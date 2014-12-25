@@ -6,7 +6,7 @@ import (
 )
 
 // Passwords for MySql
-func Mysql(pass string) string {
+func MySQL(pass string) string {
 	// Create our own hasher, for thread safety
 	hasher := sha1.New()
 	// This is actually really simple, it's just a sha1 of a sha1 displayed as hex
