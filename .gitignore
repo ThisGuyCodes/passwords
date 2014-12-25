@@ -20,3 +20,6 @@ _testmain.go
 
 # Cloud 9
 .c9revisions/
+
+# Sublime
+*.sublime-workspace
